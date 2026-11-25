@@ -10,6 +10,11 @@ every run, so the output is byte-identical each time.
 import os
 import sys
 
+# The gate allows one line of 1 to 199 characters; keep the bounds
+# named so the check below and the docstring cannot drift apart.
+MIN_LEN = 1
+MAX_LEN = 199
+
 # The phone's last words: after years of silently fixing its owner's
 # typos, it spends its final percent fixing the one text that
 # mattered -- and signs off pleased with itself. One line, phone's
@@ -21,7 +26,7 @@ LINE = (
 
 
 def main() -> int:
-    if not 1 <= len(LINE) <= 199:
+    if not MIN_LEN <= len(LINE) <= MAX_LEN:
         print(f"line length {len(LINE)} out of range", file=sys.stderr)
         return 1
     if LINE != LINE.strip() or "\n" in LINE:
